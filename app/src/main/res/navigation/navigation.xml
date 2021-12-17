@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation"
+    app:startDestination="@id/categoriesFragment">
+
+    <fragment
+        android:id="@+id/categoriesFragment"
+        android:name="com.luizcorrea.recipebook.ui.fragments.CategoriesFragment"
+        android:label="fragment_categories"
+        tools:layout="@layout/fragment_categories">
+        <action
+            android:id="@+id/action_categoriesFragment_to_filterByTypeFragment"
+            app:destination="@id/filterByTypeFragment">
+            <argument
+                android:name="category"
+                android:defaultValue="@null"
+                app:argType="string"
+                app:nullable="true" />
+        </action>
+    </fragment>
+    <fragment
+        android:id="@+id/filterByTypeFragment"
+        android:name="com.luizcorrea.recipebook.ui.fragments.FilterByTypeFragment"
+        android:label="FilterByTypeFragment"
+        tools:layout="@layout/fragment_categories">
+        <argument
+            android:name="category"
+            android:defaultValue="@null"
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="isFavorites"
+            android:defaultValue="N"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_filterByTypeFragment_to_categoriesFragment"
+            app:destination="@id/categoriesFragment"
+            app:popUpTo="@id/categoriesFragment"
+            app:popUpToInclusive="false"/>
+        <action
+            android:id="@+id/action_filterByTypeFragment_to_recipeDetailFragment"
+            app:destination="@id/recipeDetailFragment">
+            <argument
+                android:name="mealId"
+                android:defaultValue="0"
+                app:argType="integer" />
+        </action>
+    </fragment>
+    <fragment
+        android:id="@+id/recipeDetailFragment"
+        android:name="com.luizcorrea.recipebook.ui.fragments.RecipeDetailFragment"
+        android:label="recipe_detail_fragment"
+        tools:layout="@layout/recipe_detail_fragment">
+        <argument
+            android:name="mealId"
+            app:argType="integer"
+            android:defaultValue="0"
+            />
+    </fragment>
+</navigation>

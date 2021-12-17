@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:bind="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_margin="16dp">
+
+    <!--    item subcategory  -->
+    <data>
+        <variable
+            name="favoriteClickListener"
+            type="com.luizcorrea.recipebook.ui.adapter.MealAdapter.FavoriteClickListener" />
+        <variable
+            name="clickListener"
+            type="android.view.View.OnClickListener"/>
+        <variable
+            name="meal"
+            type="com.luizcorrea.recipebook.data.model.db.Meal" />
+    </data>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:onClick="@{clickListener}"
+        android:elevation="8dp"
+        android:padding="16dp"
+        android:layout_marginBottom="30dp"
+        app:cardCornerRadius="8dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#f3f3f3">
+
+            <ImageView
+                android:id="@+id/imageViewThumbNail"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_marginTop="8dp"
+                android:padding="8dp"
+                android:scaleType="centerCrop"
+                bind:setImageUrl="@{meal.mealImageUrl}"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:srcCompat="@tools:sample/backgrounds/scenic" />
+
+            <TextView
+                android:id="@+id/textViewTitle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:padding="5dp"
+                android:text="@{meal.mealName}"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/imageViewThumbNail"
+                app:layout_constraintEnd_toStartOf="@id/ivFavorite"
+                app:layout_constraintStart_toEndOf="@+id/imageViewThumbNail"
+                app:layout_constraintTop_toTopOf="@+id/imageViewThumbNail"
+                tools:text="Spaghetti Bolognese" />
+
+            <ImageView
+                android:id="@+id/ivFavorite"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:onClick="@{() -> favoriteClickListener.onFavoriteClick(meal)}"
+                android:padding="5dp"
+                android:src="@{meal.isFavorite == 1 ? @drawable/ic_favorites : @drawable/ic_favorite_hollow}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+</layout>
+
